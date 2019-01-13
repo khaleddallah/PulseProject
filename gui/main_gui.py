@@ -10,10 +10,10 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_MainWindow(object):
-    def __init__(self,Patients_DB0,Medical_Images_Processing0,Pulse_Recording0,QMW):
-        self.Patients_DB0=Patients_DB0
-        self.Medical_Images_Processing0=Medical_Images_Processing0
-        self.Pulse_Recording0=Pulse_Recording0
+    def __init__(self,Patients_DB,Medical_Images_Processing,Pulse_Recording,QMW):
+        self.Patients_DB_UI=Patients_DB
+        self.Medical_Images_Processing_UI=Medical_Images_Processing
+        self.Pulse_Recording_UI=Pulse_Recording
         self.QMW=QMW
 
 
@@ -46,7 +46,12 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        self.Patients_DB.clicked.connect(self.ChangeToPatientDB)
+
+        # Execute Transition when click on the buttons
+        self.Patients_DB.clicked.connect(self.goto_PatientDB)
+        self.Medical_Images_Processing.clicked.connect(self.goto_Medical_Images_Processing)
+        self.Pulse_Recording.clicked.connect(self.goto_Pulse_Recording)
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -55,12 +60,41 @@ class Ui_MainWindow(object):
         self.Medical_Images_Processing.setText(_translate("MainWindow", "Medical Images Processing"))
         self.Pulse_Recording.setText(_translate("MainWindow", "Pulse Recording"))
 
+    # Change to Patients DB window
+    # def ChangeToPatientDB (self):
+    #     self.ui = self.Patients_DB0
+    #     self.ui.setupUi(self.QMW)
+    #     self.QMW.show()
+    #     self.centralwidget.hide()
 
-    def ChangeToPatientDB (self):
-        self.ui = self.Patients_DB0
-        self.ui.setupUi(self.QMW)
+
+
+    # general change function
+    def gotoWin (self,ui):
+        # self.centralwidget.hide()
+        # self.QMW.hide()
+        self.QMW.hide()
+        self.QMW=QtWidgets.QWidget()
+        ui.setupUi(self.QMW)
         self.QMW.show()
-        self.centralwidget.hide()
+
+    # Change to Patients_DB window 
+    def goto_PatientDB (self):
+        self.gotoWin(self.Patients_DB_UI)
+
+
+    # Change to Medical_Images_Processing window
+    def goto_Medical_Images_Processing (self):
+        self.gotoWin(self.Medical_Images_Processing_UI)
+
+
+
+    # Change to Pulse_Recording window
+    def goto_Pulse_Recording (self):
+        self.gotoWin(self.Pulse_Recording_UI)
+
+
+
 
 
 
