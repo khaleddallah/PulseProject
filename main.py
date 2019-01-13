@@ -1,18 +1,23 @@
 from gui.main_gui import *
 from gui.Patients_DB import *
+from gui.PulseRecording1 import *
+from gui.PulseRecording2 import *
+
 import sys
 
 
 class main0:
 	def main(self):
 		app = QtWidgets.QApplication(sys.argv)
-		MainWindow = QtWidgets.QMainWindow()
+		QMW = QtWidgets.QMainWindow()
 
 		Patients_DB=Ui_Patients_DB()
-		ui = Ui_MainWindow(Patients_DB,Patients_DB,Patients_DB,MainWindow)
+		PulseRecording1=Ui_PulseRecording1()
 
-		ui.setupUi(MainWindow)
-		MainWindow.show()
+		ui = Ui_MainWindow(Patients_DB,Patients_DB,PulseRecording1,QMW)
+
+		ui.setupUi(QMW)
+		QMW.show()
 		sys.exit(app.exec_())
 
 

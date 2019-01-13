@@ -73,10 +73,20 @@ class Ui_MainWindow(object):
     def gotoWin (self,ui):
         # self.centralwidget.hide()
         # self.QMW.hide()
+
+        # self.QMW.hide()
+        # self.QMW=QtWidgets.QWidget()
+        # ui.setupUi(self.QMW)
+        # self.QMW.show()
+
         self.QMW.hide()
-        self.QMW=QtWidgets.QWidget()
+        self.QMW=QtWidgets.QMainWindow()
         ui.setupUi(self.QMW)
         self.QMW.show()
+
+
+
+
 
     # Change to Patients_DB window 
     def goto_PatientDB (self):
