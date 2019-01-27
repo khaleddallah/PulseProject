@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>PulseRecording2</class>
- <widget class="QWidget" name="PulseRecording2">
+ <class>PulseRecordingM</class>
+ <widget class="QWidget" name="PulseRecordingM">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>PulseRecordingM</string>
   </property>
   <widget class="QWidget" name="Patient" native="true">
    <property name="geometry">

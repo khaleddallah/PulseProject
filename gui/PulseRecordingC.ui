@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Patients_DB</class>
- <widget class="QWidget" name="Patients_DB">
+ <class>PulseRecordingC</class>
+ <widget class="QWidget" name="PulseRecordingC">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>530</width>
-    <height>299</height>
+    <width>400</width>
+    <height>311</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Patients DB</string>
+   <string>PulseRecordingC</string>
   </property>
-  <widget class="QWidget" name="horizontalLayoutWidget">
+  <widget class="QWidget" name="horizontalLayoutWidget_2">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>20</y>
+     <y>10</y>
      <width>371</width>
      <height>51</height>
     </rect>
@@ -53,95 +53,11 @@
     </item>
    </layout>
   </widget>
-  <widget class="QPushButton" name="Search">
-   <property name="geometry">
-    <rect>
-     <x>400</x>
-     <y>20</y>
-     <width>111</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Search</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="Add">
-   <property name="geometry">
-    <rect>
-     <x>350</x>
-     <y>240</y>
-     <width>161</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Add</string>
-   </property>
-  </widget>
-  <widget class="QWidget" name="verticalLayoutWidget_3">
-   <property name="geometry">
-    <rect>
-     <x>350</x>
-     <y>90</y>
-     <width>160</width>
-     <height>89</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="View_AMI_Del_VL">
-    <item>
-     <widget class="QPushButton" name="View">
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>View</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="Add_medical_image">
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Add Medical Image</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="Delete">
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Delete</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
   <widget class="QScrollArea" name="scrollArea">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>90</y>
+     <y>80</y>
      <width>321</width>
      <height>181</height>
     </rect>
@@ -256,6 +172,32 @@
      </property>
     </widget>
    </widget>
+  </widget>
+  <widget class="QPushButton" name="Next">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>280</y>
+     <width>80</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Next</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Back">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>280</y>
+     <width>80</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Back</string>
+   </property>
   </widget>
  </widget>
  <resources/>
