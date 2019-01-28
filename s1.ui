@@ -70,22 +70,34 @@
    <widget class="QWidget" name="verticalLayoutWidget_3">
     <property name="geometry">
      <rect>
-      <x>500</x>
+      <x>550</x>
       <y>110</y>
-      <width>160</width>
-      <height>89</height>
+      <width>131</width>
+      <height>120</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="View_AMI_Del_VL1">
      <item>
-      <widget class="QPushButton" name="View1">
+      <widget class="QPushButton" name="AllPatients1">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
         </font>
        </property>
        <property name="text">
-        <string>View</string>
+        <string>All Patients</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Details1">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Details of Patient</string>
        </property>
       </widget>
      </item>
@@ -136,9 +148,9 @@
    <widget class="QPushButton" name="Add1">
     <property name="geometry">
      <rect>
-      <x>500</x>
+      <x>550</x>
       <y>290</y>
-      <width>161</width>
+      <width>131</width>
       <height>31</height>
      </rect>
     </property>
@@ -156,7 +168,7 @@
      <rect>
       <x>40</x>
       <y>110</y>
-      <width>441</width>
+      <width>501</width>
       <height>211</height>
      </rect>
     </property>
@@ -200,7 +212,7 @@
       <x>40</x>
       <y>10</y>
       <width>301</width>
-      <height>101</height>
+      <height>91</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -218,7 +230,7 @@
        <x>10</x>
        <y>10</y>
        <width>281</width>
-       <height>51</height>
+       <height>41</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="Name_HL1">
@@ -252,11 +264,11 @@
       </item>
      </layout>
     </widget>
-    <widget class="QPushButton" name="Search1">
+    <widget class="QPushButton" name="SearchByName1">
      <property name="geometry">
       <rect>
-       <x>90</x>
-       <y>70</y>
+       <x>10</x>
+       <y>60</y>
        <width>121</width>
        <height>21</height>
       </rect>
@@ -277,7 +289,7 @@
       <x>340</x>
       <y>10</y>
       <width>141</width>
-      <height>101</height>
+      <height>91</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -292,7 +304,7 @@
        <x>10</x>
        <y>10</y>
        <width>127</width>
-       <height>51</height>
+       <height>41</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="Last_Name_VL1_2">
@@ -312,7 +324,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>70</y>
+       <y>60</y>
        <width>91</width>
        <height>21</height>
       </rect>
