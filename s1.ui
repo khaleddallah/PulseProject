@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>StackedWidget</string>
+   <string>Pulse Project</string>
   </property>
   <property name="currentIndex">
    <number>1</number>
@@ -115,24 +115,6 @@
      </item>
     </layout>
    </widget>
-   <widget class="QPushButton" name="Search1">
-    <property name="geometry">
-     <rect>
-      <x>380</x>
-      <y>40</y>
-      <width>101</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Search</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="Back1">
     <property name="geometry">
      <rect>
@@ -150,46 +132,6 @@
     <property name="text">
      <string>Back</string>
     </property>
-   </widget>
-   <widget class="QWidget" name="horizontalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>40</y>
-      <width>321</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="Name_HL1">
-     <item>
-      <layout class="QVBoxLayout" name="First_Name_VL1">
-       <item>
-        <widget class="QLabel" name="FirstName1">
-         <property name="text">
-          <string>First Name</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="FirstNameBox1"/>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="Last_Name_VL1">
-       <item>
-        <widget class="QLabel" name="LastName1">
-         <property name="text">
-          <string>Last Name</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="LastNameBox1"/>
-       </item>
-      </layout>
-     </item>
-    </layout>
    </widget>
    <widget class="QPushButton" name="Add1">
     <property name="geometry">
@@ -223,29 +165,167 @@
     </property>
     <column>
      <property name="text">
-      <string>id</string>
+      <string>  id  </string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>First Name</string>
+      <string>  First Name  </string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>Last Name</string>
+      <string>  Last Name  </string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>Father</string>
+      <string>   Father   </string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>Last Visit</string>
+      <string>  Last Visit  </string>
      </property>
     </column>
+    <column>
+     <property name="text">
+      <string>  BirthDate</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QFrame" name="frame1">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>10</y>
+      <width>301</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-color: rgb(62, 61, 57);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QWidget" name="horizontalLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>281</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="Name_HL1">
+      <item>
+       <layout class="QVBoxLayout" name="First_Name_VL1">
+        <item>
+         <widget class="QLabel" name="FirstName1">
+          <property name="text">
+           <string>First Name</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="FirstNameBox1"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="Last_Name_VL1">
+        <item>
+         <widget class="QLabel" name="LastName1">
+          <property name="text">
+           <string>Last Name</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="LastNameBox1"/>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QPushButton" name="Search1">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>70</y>
+       <width>121</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Search By Name</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="frameId1">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>10</y>
+      <width>141</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>127</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="Last_Name_VL1_2">
+      <item>
+       <widget class="QLabel" name="LastName1_2">
+        <property name="text">
+         <string>Patient ID</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="IdBox1"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QPushButton" name="SearchById1">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>70</y>
+       <width>91</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Search By ID</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QWidget" name="NewPatient2">
