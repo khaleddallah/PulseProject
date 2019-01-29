@@ -1,7 +1,7 @@
 import sys
-from PyQt5.QtCore import pyqtSlot 
+from PyQt5.QtCore import pyqtSlot ,Qt
 
-from PyQt5.QtWidgets import QApplication 
+from PyQt5.QtWidgets import QApplication, QFileDialog
 from PyQt5.QtWidgets import QMainWindow,QWidget
 from PyQt5.QtWidgets import QStackedWidget,QTableWidgetItem
 from PyQt5.QtWidgets import QHeaderView,QAbstractItemView
@@ -11,10 +11,9 @@ from PyQt5.QtGui import QIntValidator ,QPixmap
 from PyQt5.uic import loadUi
 
 from funktions2 import *
-from test_c1 import *
 
 #===========================================================================
-class Main(QStackedWidget,funktions,a):
+class Main(QStackedWidget,funktions):
 	def __init__(self):
 		super().__init__()
 		funktions.ConnectToDB(r"./database3.db")
@@ -31,6 +30,7 @@ class Main(QStackedWidget,funktions,a):
 	#=============================== config all buttons
 	# when we set button to run func more one time , it run the func mort one time
 	# so we will make one function for set functions for all buttons
+	#تهيئة جميع الأزرار في جميع الصفحات  ليقومو بالمهام الخاصة بهم
 	def setButtonsFunc(self):
 		### 0
 		self.PatientsDB0.clicked.connect(self.loadPatientsDB)
@@ -77,6 +77,7 @@ class Main(QStackedWidget,funktions,a):
 		### 6
 		self.Back6.clicked.connect(self.loadPatientsDB)
 		self.Main6.clicked.connect(self.loadMain)
+		self.ChooseImageButton6.clicked.connect(self.setImage)
 
 		### 7
 		self.Back7.clicked.connect(self.loadMain)
@@ -181,6 +182,14 @@ class Main(QStackedWidget,funktions,a):
 	#=============================== 6
 	def loadAddMedImg(self):
 		self.setCurrentIndex(6)
+
+	def setImage(self):
+		fileName,_ = QFileDialog.getOpenFileName(None,"Select Image","","Image Files (*.png *.jpg *.jpeg *.bmp")
+		if fileName:
+			pixmap0 = QPixmap(fileName)
+			pixmap0 = pixmap0.scaled(self.graphicsView6.width(), self.graphicsView6.height(), Qt.KeepAspectRatio)
+			self.graphicsView6.setPixmap(pixmap0)
+			self.graphicsView6.setAlignment(Qt.AlignCenter)
 
 
 	#=============================== 9

@@ -1,7 +1,14 @@
-class A:
+
+class O:
+    def __init__(self):
+        print('Running O.__init__')
+        # super().__init__()
+
+
+class A(object):
     def __init__(self):
         print('Running A.__init__')
-        # super().__init__()
+        super().__init__()
 
 class B(A):
     def __init__(self):
@@ -21,7 +28,7 @@ class T:
         print('Running T.__init__')
 
 
-class X(A):
+class X(object):
     def __init__(self):
         print('Running X.__init__') 
         super().__init__()

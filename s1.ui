@@ -14,7 +14,7 @@
    <string>Pulse Project</string>
   </property>
   <property name="currentIndex">
-   <number>1</number>
+   <number>6</number>
   </property>
   <widget class="QWidget" name="Main0">
    <widget class="QPushButton" name="PulseRecording0">
@@ -72,7 +72,7 @@
      <rect>
       <x>550</x>
       <y>110</y>
-      <width>131</width>
+      <width>135</width>
       <height>120</height>
      </rect>
     </property>
@@ -230,7 +230,7 @@
        <x>10</x>
        <y>10</y>
        <width>281</width>
-       <height>41</height>
+       <height>48</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="Name_HL1">
@@ -304,7 +304,7 @@
        <x>10</x>
        <y>10</y>
        <width>127</width>
-       <height>41</height>
+       <height>46</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="Last_Name_VL1_2">
@@ -1232,16 +1232,6 @@
      </property>
     </item>
    </widget>
-   <widget class="QGraphicsView" name="graphicsView6">
-    <property name="geometry">
-     <rect>
-      <x>320</x>
-      <y>20</y>
-      <width>341</width>
-      <height>351</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QWidget" name="horizontalLayoutWidget_12">
     <property name="geometry">
      <rect>
@@ -1267,6 +1257,38 @@
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>20</y>
+      <width>371</width>
+      <height>381</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-color: rgb(25, 25, 25);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="graphicsView6">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>371</width>
+       <height>381</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QWidget" name="MedImgProcessingC7">
