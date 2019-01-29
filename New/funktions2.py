@@ -13,11 +13,8 @@ class funktions:
        def MaxIdPatientsTable():
            command="""SELECT Max(PatID) FROM Patient"""
            funktions.cur1.execute(command)
-           infos=funktions.cur1.fetchall()[0][0]
-           if (infos==None):
-               infos=0
-               print('infos2 ',infos)
-           return(infos)
+           infos=funktions.cur1.fetchall()
+           return(infos[0][0])
 
 
        def DBdatenanzeigen():

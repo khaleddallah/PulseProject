@@ -1,26 +1,32 @@
 import sys
 from PyQt5.QtCore import pyqtSlot 
 
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QApplication 
 from PyQt5.QtWidgets import QMainWindow,QWidget
 from PyQt5.QtWidgets import QStackedWidget,QTableWidgetItem
 from PyQt5.QtWidgets import QHeaderView,QAbstractItemView
 
-from PyQt5.QtGui import QIntValidator
+from PyQt5.QtGui import QIntValidator ,QPixmap
 
 from PyQt5.uic import loadUi
 
 from funktions2 import *
-
+from test_c1 import *
 
 #===========================================================================
-class Main(QStackedWidget,funktions):
+class Main(QStackedWidget,funktions,a):
 	def __init__(self):
 		super().__init__()
 		funktions.ConnectToDB(r"./database3.db")
 		loadUi('s1.ui',self)
 		self.loadMain()
 		self.setButtonsFunc()
+
+		#change background
+		# pixmap = QPixmap('image.jpg')
+		# self.setPixmap(pixmap)
+		
+
 
 	#=============================== config all buttons
 	# when we set button to run func more one time , it run the func mort one time
@@ -91,10 +97,12 @@ class Main(QStackedWidget,funktions):
 
 	#=============================== 0
 	def loadMain(self):
+		#self.setStyleSheet("background-image: url(image.jpg);")
 		self.setCurrentIndex(0)
 
 	#=============================== 1
 	def loadPatientsDB(self):
+		#self.setStyleSheet("background-image: url(image2.png);")
 		self.setCurrentIndex(1)
 
 	def SearchById(self):
