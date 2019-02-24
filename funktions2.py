@@ -4,7 +4,7 @@ import sqlite3
 #cur1 = connection.cursor()
 
 class funktions:
-       curl=0
+       cur1=0
        connection=0
        def ConnectToDB(path):
            funktions.connection = sqlite3.connect(path)
@@ -19,6 +19,23 @@ class funktions:
                print('infos2 ',infos)
            return(infos)
 
+       def MaxImgId(id):
+           command="""SELECT Max(PatID) FROM BILDER  PatID = {}""".format(id)
+           funktions.cur1.execute(command)
+           infos=funktions.cur1.fetchall()[0][0]
+           if (infos==None):
+               infos=0
+               print('infos2 ',infos)
+           return(infos)    
+
+       def MaxRecId(id):
+           command="""SELECT Max(PatID) FROM SIGNAL  PatID = {}""".format(id)
+           funktions.cur1.execute(command)
+           infos=funktions.cur1.fetchall()[0][0]
+           if (infos==None):
+               infos=0
+               print('infos2 ',infos)
+           return(infos)  
 
        def DBdatenanzeigen():
            command="""select Patient.PatID,Patient.VORNAME,Patient.NACHNAME,Patient.GEBURTSDATUM,Patient.LETZTENBESUCH,BILDER.untersuchungstyp,BILDER.Bildgebungdatum,BILDER.SPEICHERORT from Patient left join Bilder on Patient.PatID=Bilder.PatID """
@@ -32,6 +49,21 @@ class funktions:
            infos=funktions.cur1.fetchall()
            return(infos)
 
+        #get medical images of one patient
+       def AllMedicalImg(x):
+           command="""SELECT * FROM BILDER where PatID = {}""".format(x)
+           funktions.cur1.execute(command)
+           infos=funktions.cur1.fetchall()
+           return(infos)
+
+       def AllSignals(x):
+           command="""SELECT * FROM SIGNAL where PatID = {}""".format(x)
+           funktions.cur1.execute(command)
+           infos=funktions.cur1.fetchall()
+           return(infos)            
+
+
+
        def neuPat(x):
            command1 = """INSERT INTO Patient VALUES(?,?,?,?,?)"""
            funktions.cur1.execute(command1,x)
@@ -40,6 +72,15 @@ class funktions:
            funktions.cur1.execute(command2)
            infos=funktions.cur1.fetchall()
            print(infos)
+
+       def neuImg(x):
+           command1 = """INSERT INTO BILDER VALUES(?,?,?,?)"""
+           funktions.cur1.execute(command1,x)
+           funktions.connection.commit()
+
+
+
+
 
        def loschen(id):
            command3="""delete  from Patient where PatID = {}""".format(id)

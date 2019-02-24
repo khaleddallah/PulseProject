@@ -3,8 +3,8 @@ import sqlite3
 import matplotlib.pyplot as plt
 from scipy import signal
 import numpy as np
-connection=sqlite3.connect(r"C:\Users\Waref Ali\Desktop\database3.db")
-cur1=connection.cursor()
+
+
 class BILDVERARBEITUNG():#كلاس معالجة الصور الطبية
     def bildanzeigen():#لإظهار صورة طبية من قاعدة البيانات
         d =''
