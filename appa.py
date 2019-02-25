@@ -16,8 +16,10 @@ from PyQt5.uic import loadUi
 
 from funktions2 import *
 
+from bildverarbeitung import * 
+
 #========================================================================================================================
-class Main(QStackedWidget,funktions):
+class Main(QStackedWidget, funktions,  BILDVERARBEITUNG):
 	def __init__(self):
 		super().__init__()
 		funktions.ConnectToDB(r"./database3.db")
@@ -75,6 +77,7 @@ class Main(QStackedWidget,funktions):
 		self.MedicalImageTable7.resizeColumnsToContents()
 		#to make user able to select complete row by click any where of it 
 		self.MedicalImageTable7.setSelectionBehavior(QAbstractItemView.SelectRows)
+
 
 		#Table config PatientTable7
 		#resize table header to fit the word of fields
@@ -138,6 +141,8 @@ class Main(QStackedWidget,funktions):
 		### 8
 		self.Back8.clicked.connect(self.loadMedImgProcessingCF)
 		self.Main8.clicked.connect(self.loadMain)
+		self.Process8.clicked.connect(self.process8)
+		self.ProcessingTpyeCombo8.currentIndexChanged.connect(self.ComboBox8event)
 
 		### 9
 		self.Back9.clicked.connect(self.loadMain)
@@ -166,6 +171,7 @@ class Main(QStackedWidget,funktions):
 
 	#============================================================================ 1
 	def loadPatientsDB(self):
+		#self.PatientsDB0.hide()
 		self.tableWidget1.setRowCount(0)
 		for i in [self.IdBox1,self.FirstNameBox1,self.LastNameBox1]:
 			i.setText('')
@@ -277,7 +283,6 @@ class Main(QStackedWidget,funktions):
 
 	#============================================================================ 5
 	#set right data and load page 
-
 	# in:selected row || out:Pat Id of selected row
 	def get_selected_id(self,table,x):
 		y=table.item(x,0).text()
@@ -323,7 +328,7 @@ class Main(QStackedWidget,funktions):
 		self.insertMultiRowInPatientsTable(sigData,table)
 
 	def errorIfNoSelect(self):
-		self.msgCreator()c
+		self.msgCreator()
 		self.msg.label.setText('You have to select patient to view details')
 
 
@@ -345,7 +350,7 @@ class Main(QStackedWidget,funktions):
 		self.ImagePathValue6.setText('/'.join(fileName.split('/')[:-1]))
 
 	def setImage(self,graphview):
-		fileName,_ = QFileDialog.getOpenFileName(None,"Select Image","","Image Files (*.png *.jpg *.jpeg *.bmp")
+		fileName,_ = QFileDialog.getOpenFileName(None,"Select Image","","Image Files (*.png *.jpg *.jpeg *.bmp)")
 		if fileName:
 			pixmap0 = QPixmap(fileName)
 			pixmap0 = pixmap0.scaled(graphview.width(), graphview.height(), Qt.KeepAspectRatio)
@@ -359,7 +364,6 @@ class Main(QStackedWidget,funktions):
 		Data=[str(self.patId), self.ImgTypeCombo6.currentText(), nowDate, self.ImagePathValue6.text()]
 		print(Data)
 		funktions.neuImg(Data)
-
 
 	#============================================================================ 9
 	def loadPulseRecordingC(self):
@@ -412,6 +416,42 @@ class Main(QStackedWidget,funktions):
 	#============================================================================ 8
 	def loadMedImgProcessingM(self):
 		self.setCurrentIndex(9)
+	
+
+	# to enable parameter and name it if required
+	def ComboBox8event(self):
+		x=self.ProcessingTpyeCombo8.currentIndex()
+		if   (x==0): pass
+		elif (x==1): pass
+		elif (x==2): pass
+		elif (x==3): pass
+		elif (x==4): pass
+		elif (x==5): pass
+		elif (x==6): pass
+		elif (x==7): pass
+
+			
+	# to exec right process func 
+	def process8(self):
+		x=self.ProcessingTpyeCombo8.currentIndex()
+		if   (x==0): 
+			i=BILDVERARBEITUNG.bildhistugram(self.fileName)
+			self.setVarImg(i,self.graphicsViewR8)
+		elif (x==1): 
+			i=BILDVERARBEITUNG.bildfaltung(self.fileName,2)
+			self.setVarImg(i,self.graphicsViewR8)
+		elif (x==2): pass
+		elif (x==3): pass
+		elif (x==4): pass
+		elif (x==5): pass
+		elif (x==6): pass
+		elif (x==7): pass
+
+	def setVarImg(self,img ,graphview):
+		pixmap0 = QPixmap(img)
+		pixmap0 = pixmap0.scaled(graphview.width(), graphview.height(), Qt.KeepAspectRatio)
+		graphview.setPixmap(pixmap0)
+		graphview.setAlignment(Qt.AlignCenter)
 
 	#============================================================================ 12
 	def loadMedImgProcessingCF(self):
@@ -420,8 +460,8 @@ class Main(QStackedWidget,funktions):
 
 	#choose image from hard disk
 	def setImage12(self):
-		fileName=self.setImage(self.graphicsViewO8)
-		if fileName:
+		self.fileName=self.setImage(self.graphicsViewO8)
+		if self.fileName:
 			self.loadMedImgProcessingM()
 
 
