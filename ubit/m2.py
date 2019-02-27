@@ -16,4 +16,4 @@ while True:
         display.show(incoming)  
         print(incoming)
         sleep(SAMPLING_INTERVAL)
-        display.clear()s
+        display.clear()
