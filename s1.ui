@@ -7,14 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>689</width>
-    <height>416</height>
+    <height>419</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Pulse Project</string>
   </property>
   <property name="currentIndex">
-   <number>9</number>
+   <number>11</number>
   </property>
   <widget class="QWidget" name="Main0">
    <widget class="QPushButton" name="PulseRecording0">
@@ -339,7 +339,7 @@
    <widget class="QLabel" name="Header2">
     <property name="geometry">
      <rect>
-      <x>50</x>
+      <x>20</x>
       <y>30</y>
       <width>281</width>
       <height>51</height>
@@ -353,86 +353,6 @@
     <property name="text">
      <string>New Patient :</string>
     </property>
-   </widget>
-   <widget class="QWidget" name="horizontalLayoutWidget_6">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>110</y>
-      <width>601</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="Name_HL2">
-     <item>
-      <layout class="QVBoxLayout" name="First_Name_VL2">
-       <item>
-        <widget class="QLabel" name="FirstName2">
-         <property name="text">
-          <string>First Name:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="FirstNameBox2"/>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="Last_Name_VL2">
-       <item>
-        <widget class="QLabel" name="LastName2">
-         <property name="text">
-          <string>Last Name:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="LastNameBox2"/>
-       </item>
-      </layout>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="horizontalLayoutWidget_7">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>200</y>
-      <width>601</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="Fater_Birth2">
-     <item>
-      <layout class="QVBoxLayout" name="Father_Name_VL2">
-       <item>
-        <widget class="QLabel" name="FatherName2">
-         <property name="text">
-          <string>Father Name:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="FatherNameBox2"/>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="BirthDate_VL2">
-       <item>
-        <widget class="QLabel" name="BirthDate2">
-         <property name="text">
-          <string>Birth Date:  </string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="BirthDateBox2"/>
-       </item>
-      </layout>
-     </item>
-    </layout>
    </widget>
    <widget class="QWidget" name="horizontalLayoutWidget_8">
     <property name="geometry">
@@ -464,7 +384,7 @@
     <property name="geometry">
      <rect>
       <x>290</x>
-      <y>310</y>
+      <y>290</y>
       <width>111</width>
       <height>41</height>
      </rect>
@@ -480,6 +400,84 @@
     <property name="text">
      <string>Add</string>
     </property>
+   </widget>
+   <widget class="QFrame" name="frame_7">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>110</y>
+      <width>641</width>
+      <height>161</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>90</y>
+       <width>301</width>
+       <height>59</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="BirthDate_VL2">
+      <item>
+       <widget class="QLabel" name="BirthDate2">
+        <property name="text">
+         <string>Birth Date:  </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="BirthDateBox2"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="horizontalLayoutWidget_6">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>10</y>
+       <width>601</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="Name_HL2">
+      <item>
+       <layout class="QVBoxLayout" name="First_Name_VL2">
+        <item>
+         <widget class="QLabel" name="FirstName2">
+          <property name="text">
+           <string>First Name:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="FirstNameBox2"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="Last_Name_VL2">
+        <item>
+         <widget class="QLabel" name="LastName2">
+          <property name="text">
+           <string>Last Name:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="LastNameBox2"/>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
    </widget>
   </widget>
   <widget class="QWidget" name="NewPatientS3">
@@ -676,7 +674,7 @@
         </font>
        </property>
        <property name="text">
-        <string>---</string>
+        <string/>
        </property>
       </widget>
      </item>
@@ -789,17 +787,22 @@
     </property>
     <column>
      <property name="text">
-      <string>Date</string>
+      <string>  id  </string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>Duration</string>
+      <string>  HR  </string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>HR</string>
+      <string>  Date  </string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>  Duration  </string>
      </property>
     </column>
    </widget>
@@ -817,17 +820,22 @@
     </property>
     <column>
      <property name="text">
-      <string>Date</string>
+      <string>  id  </string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>Type</string>
+      <string>  Type  </string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>Path</string>
+      <string>  Date  </string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>  Path  </string>
      </property>
     </column>
    </widget>
@@ -987,7 +995,7 @@
          </font>
         </property>
         <property name="text">
-         <string>---</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -1419,6 +1427,11 @@
     </property>
     <column>
      <property name="text">
+      <string>  id  </string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
       <string>    Type    </string>
      </property>
     </column>
@@ -1667,7 +1680,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 255);</string>
+     <string notr="true">background-color: rgb(159, 159, 159);</string>
     </property>
     <property name="text">
      <string/>
@@ -1683,10 +1696,10 @@
      </rect>
     </property>
     <property name="text">
-     <string>parameter</string>
+     <string/>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="lineEdit8">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -1932,7 +1945,7 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>200</y>
+      <y>180</y>
       <width>180</width>
       <height>18</height>
      </rect>
@@ -1967,22 +1980,6 @@
      </item>
     </layout>
    </widget>
-   <widget class="QPushButton" name="Stop10">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>210</y>
-      <width>80</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 85, 0);</string>
-    </property>
-    <property name="text">
-     <string>Stop</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="Start10">
     <property name="geometry">
      <rect>
@@ -2002,8 +1999,8 @@
    <widget class="QPushButton" name="Save10">
     <property name="geometry">
      <rect>
-      <x>370</x>
-      <y>250</y>
+      <x>470</x>
+      <y>210</y>
       <width>80</width>
       <height>23</height>
      </rect>
@@ -2035,81 +2032,13 @@
      <string>Patient info:</string>
     </property>
    </widget>
-   <widget class="QWidget" name="gridLayoutWidget_3">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>50</y>
-      <width>251</width>
-      <height>100</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="Patient_info_GL10">
-     <item row="2" column="0">
-      <widget class="QLabel" name="Full_Name10">
-       <property name="text">
-        <string>Full Name</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="Last_Visit10">
-       <property name="text">
-        <string>Last Visit</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <widget class="QLabel" name="Last_Visit_value10">
-       <property name="text">
-        <string>---</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLabel" name="Full_Name_value10">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="Full_Name10_2">
-       <property name="text">
-        <string>ID</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="Mother10">
-       <property name="text">
-        <string>BirthDate</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QLabel" name="Birth_value10">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLabel" name="Id10">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
    <widget class="QFrame" name="frame_4">
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>220</y>
+      <y>200</y>
       <width>191</width>
-      <height>71</height>
+      <height>131</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -2118,77 +2047,92 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QWidget" name="MicroBit10" native="true">
+    <widget class="QLabel" name="MicroBitPort10">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>151</width>
-       <height>51</height>
+       <width>81</width>
+       <height>19</height>
       </rect>
      </property>
-     <property name="autoFillBackground">
-      <bool>false</bool>
+     <property name="text">
+      <string>MicroBit Port</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="MedPort10">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>10</y>
+       <width>69</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string/>
+      </property>
+     </item>
+    </widget>
+    <widget class="QLabel" name="MB_connection10">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>171</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string> !!!!</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="connect10">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>90</y>
+       <width>80</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Droid Sans Arabic</family>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">background-color: rgb(94, 14, 255);</string>
      </property>
-     <widget class="QLabel" name="MicroBitPort10">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>81</width>
-        <height>19</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>MicroBit Port</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="MB_connection10">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>30</y>
-        <width>181</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>MicroBit is Connected</string>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="MedPort10">
-      <property name="geometry">
-       <rect>
-        <x>80</x>
-        <y>0</y>
-        <width>69</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <item>
-       <property name="text">
-        <string>COM3</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>COM4</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>COM5</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string/>
-       </property>
-      </item>
-     </widget>
+     <property name="text">
+      <string>Connect</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="refresh10">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>90</y>
+       <width>80</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Droid Sans Arabic</family>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(85, 170, 127);</string>
+     </property>
+     <property name="text">
+      <string>Refresh</string>
+     </property>
     </widget>
    </widget>
    <widget class="Line" name="line">
@@ -2209,7 +2153,7 @@
      <rect>
       <x>370</x>
       <y>50</y>
-      <width>221</width>
+      <width>251</width>
       <height>81</height>
      </rect>
     </property>
@@ -2223,8 +2167,8 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>10</y>
-       <width>181</width>
+       <y>50</y>
+       <width>231</width>
        <height>21</height>
       </rect>
      </property>
@@ -2265,8 +2209,8 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>40</y>
-       <width>185</width>
+       <y>10</y>
+       <width>231</width>
        <height>30</height>
       </rect>
      </property>
@@ -2284,13 +2228,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QDoubleSpinBox" name="DurationSpin10">
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-       </widget>
+       <widget class="QLineEdit" name="duration10"/>
       </item>
      </layout>
     </widget>
@@ -2313,40 +2251,110 @@
      <rect>
       <x>370</x>
       <y>140</y>
-      <width>221</width>
-      <height>41</height>
+      <width>151</width>
+      <height>21</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="1" column="0">
-      <widget class="QLabel" name="Patient_info10_6">
-       <property name="text">
-        <string>Current HR:</string>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="0">
       <widget class="QLabel" name="Patient_info10_7">
        <property name="text">
-        <string>Time: </string>
+        <string>Status :</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
       <widget class="QLabel" name="time_value10">
        <property name="text">
-        <string>--</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLabel" name="CHR_value10">
-       <property name="text">
-        <string>--</string>
+        <string/>
        </property>
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QFrame" name="frame_6">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>50</y>
+      <width>271</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QWidget" name="gridLayoutWidget_3">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>251</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="Patient_info_GL10">
+      <item row="2" column="0">
+       <widget class="QLabel" name="Full_Name10">
+        <property name="text">
+         <string>Full Name</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="Last_Visit10">
+        <property name="text">
+         <string>Last Visit</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLabel" name="Last_Visit_value10">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLabel" name="Full_Name_value10">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="Full_Name10_2">
+        <property name="text">
+         <string>ID</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="Mother10">
+        <property name="text">
+         <string>BirthDate</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLabel" name="Birth_value10">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="Id10">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </widget>
   </widget>
  </widget>

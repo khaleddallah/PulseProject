@@ -19,8 +19,8 @@ class funktions:
                print('infos2 ',infos)
            return(infos)
 
-       def MaxImgId(id):
-           command="""SELECT Max(PatID) FROM BILDER  PatID = {}""".format(id)
+       def MaxImgId(x):
+           command="""SELECT Max(id) FROM BILDER where PatID = {}""".format(x)
            funktions.cur1.execute(command)
            infos=funktions.cur1.fetchall()[0][0]
            if (infos==None):
@@ -28,8 +28,9 @@ class funktions:
                print('infos2 ',infos)
            return(infos)    
 
-       def MaxRecId(id):
-           command="""SELECT Max(PatID) FROM SIGNAL  PatID = {}""".format(id)
+
+       def MaxRecId(x):
+           command="""SELECT Max(id) FROM SIGNAL where PatID = {}""".format(x)
            funktions.cur1.execute(command)
            infos=funktions.cur1.fetchall()[0][0]
            if (infos==None):
@@ -63,7 +64,6 @@ class funktions:
            return(infos)            
 
 
-
        def neuPat(x):
            command1 = """INSERT INTO Patient VALUES(?,?,?,?,?)"""
            funktions.cur1.execute(command1,x)
@@ -74,12 +74,14 @@ class funktions:
            print(infos)
 
        def neuImg(x):
-           command1 = """INSERT INTO BILDER VALUES(?,?,?,?)"""
+           command1 = """INSERT INTO BILDER VALUES(?,?,?,?,?)"""
            funktions.cur1.execute(command1,x)
            funktions.connection.commit()
 
-
-
+       def neuRec(x):
+           command1 = """INSERT INTO SIGNAL VALUES(?,?,?,?,?,?)"""
+           funktions.cur1.execute(command1,x)
+           funktions.connection.commit()
 
 
        def loschen(id):
@@ -93,9 +95,10 @@ class funktions:
            if (x== -1):
                print('Error ID')
                return(-1)
-           command1="""select * from Patient where PatID=(?)"""
+           command1="""select * from Patient where PatID = {}""".format(x)
            s=str(x)
-           funktions.cur1.execute(command1,s)
+           print("s is ",s)
+           funktions.cur1.execute(command1)
            pat1=funktions.cur1.fetchall()
            return(pat1)
 
@@ -120,15 +123,6 @@ class funktions:
                return(pat2)
 
 
-       def bilderhinfügen(PatID=0 ,bildtyp= "n", Datum= "n", speicherort= "n"):
-           patid=input("Geben Sie bitte die Nummer der Patient ein")
-           x=input("WAS IST DER ART DER UNTERSUCHUNG ,X-Ray,Ultraschall(Sonografie),Szintigrafie(GamaKamera),Endoskopie,Computertomografie,MRT oder Elektrokardiogramm EKG")
-           y=input("Wann wurde die Bildgebung stattgefunden")
-           z=input("Welsches Bild möchten Sie hinfügen")
-           command1="""INSERT INTO BILDER VALUES(?,?,?,?)"""
-           bilder1=(patid,x,y,z)
-           funktions.cur1.execute(command1,bilder1)
-           funktions.connection.commit()
 
 
 

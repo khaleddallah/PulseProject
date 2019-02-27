@@ -1,8 +1,9 @@
 # Main File of Project
-
-import sys
+import serial.tools.list_ports
+import sys, os
 import datetime
 from PyQt5.QtCore import pyqtSlot, Qt
+import threading
 
 from PyQt5.QtWidgets import QApplication, QFileDialog
 from PyQt5.QtWidgets import QMainWindow, QWidget
@@ -18,8 +19,9 @@ from funktions2 import *
 
 from bildverarbeitung import * 
 
+from pulse import *
 #========================================================================================================================
-class Main(QStackedWidget, funktions,  BILDVERARBEITUNG):
+class Main(QStackedWidget, funktions,  BILDVERARBEITUNG, pulse):
 	def __init__(self):
 		super().__init__()
 		funktions.ConnectToDB(r"./database3.db")
@@ -98,7 +100,6 @@ class Main(QStackedWidget, funktions,  BILDVERARBEITUNG):
 		self.IdBox1.setValidator(self.onlyInt)
 
 
-
 		### 2
 		self.Back2.clicked.connect(self.loadPatientsDB)
 		self.Main2.clicked.connect(self.loadMain)
@@ -120,7 +121,7 @@ class Main(QStackedWidget, funktions,  BILDVERARBEITUNG):
 		self.Main5.clicked.connect(self.loadMain)
 
 		### 6
-		self.Back6.clicked.connect(self.loadPatientsDB)
+		self.Back6.clicked.connect(self.reset_and_load_6)
 		self.Main6.clicked.connect(self.loadMain)
 		self.ChooseImageButton6.clicked.connect(self.setImage6)
 		self.AddImg6.clicked.connect(self.AddImgDB)
@@ -132,6 +133,7 @@ class Main(QStackedWidget, funktions,  BILDVERARBEITUNG):
 		self.SearchById7.clicked.connect(self.SearchBID7)
 
 		self.PatientTable7.cellClicked.connect(self.SetImgData7)
+		self.MedicalImageTable7.cellClicked.connect(self.getImgPath7)
 
 
 		#To allow only int
@@ -139,10 +141,14 @@ class Main(QStackedWidget, funktions,  BILDVERARBEITUNG):
 		self.IdBox7.setValidator(self.onlyInt)
 
 		### 8
-		self.Back8.clicked.connect(self.loadMedImgProcessingCF)
+		self.Back8.clicked.connect(self.reset_and_load_8)
 		self.Main8.clicked.connect(self.loadMain)
 		self.Process8.clicked.connect(self.process8)
 		self.ProcessingTpyeCombo8.currentIndexChanged.connect(self.ComboBox8event)
+		self.lineEdit8.hide()
+		self.ProcessingType8_2.hide()
+
+
 
 		### 9
 		self.Back9.clicked.connect(self.loadMain)
@@ -159,6 +165,16 @@ class Main(QStackedWidget, funktions,  BILDVERARBEITUNG):
 		### 10
 		self.Back10.clicked.connect(self.loadPulseRecordingC)
 		self.Main10.clicked.connect(self.loadMain)
+		self.refresh10.clicked.connect(self.refreshProcess)
+		self.connect10.clicked.connect(self.connectProcess)
+		self.Start10.clicked.connect(self.startRec10)
+		self.Save10.clicked.connect(self.saveProcess)
+
+		self.Start10.setEnabled(False)
+		self.Save10.setEnabled(False)
+
+		self.onlyInt = QIntValidator()
+		self.duration10.setValidator(self.onlyInt)
 
 		### 12
 		self.Main12.clicked.connect(self.loadMain)
@@ -188,10 +204,11 @@ class Main(QStackedWidget, funktions,  BILDVERARBEITUNG):
 		print('...searchByID Running')
 		try:
 			patId=int(IDBox.text())
+			data=funktions.sucheID(patId)
+			self.insertMultiRowInPatientsTable(data,tableWidget)
 		except:
-			pass
-		data=funktions.sucheID(patId)
-		self.insertMultiRowInPatientsTable(data,tableWidget)
+			self.errorIfNoSelect()
+
 
 	def SearchBN1(self):
 		self.SearchByName(self.FirstNameBox1,self.LastNameBox1,self.tableWidget1,self.IdBox1)
@@ -255,17 +272,16 @@ class Main(QStackedWidget, funktions,  BILDVERARBEITUNG):
 		# fill the rest of data of the new patient
 		firstName=self.FirstNameBox2.text()
 		lastName=self.LastNameBox2.text()
-		father=self.FatherNameBox2.text()						
 		BirthDate=self.BirthDateBox2.text()
+		nowDate=datetime.date.today().isoformat()
 
 		# reset text Boxes
 		self.FirstNameBox2.setText('')
 		self.LastNameBox2.setText('')
-		self.FatherNameBox2.setText('')
 		self.BirthDateBox2.setText('')
 
 		# put data in Data List and pass it to neuPat funktion to add patient to DB
-		Data=[patId,firstName,lastName,father,BirthDate]
+		Data=[patId,firstName,lastName,BirthDate,nowDate]
 		funktions.neuPat(Data)
 
 		# if all thing right, display success window
@@ -300,14 +316,14 @@ class Main(QStackedWidget, funktions,  BILDVERARBEITUNG):
 			self.errorIfNoSelect()
 		else:
 			patId=self.get_selected_id(self.tableWidget1,x)
-			self.setPatData(patId,self.Id_value5,self.Full_Name_value5,self.Birth_value5)
+			self.setPatData(patId,self.Id_value5,self.Full_Name_value5,self.Birth_value5,self.Last_Visit_value5)
 			self.setImgData(patId,self.MedicalImageTable5)
 			self.setPulData(patId,self.Records_table_5)
 			self.setCurrentIndex(5)
 
 
 	# set patient Data in page
-	def setPatData(self,patId,idV,fullnameV,BirthV):
+	def setPatData(self,patId,idV,fullnameV,BirthV,lastVisitV):
 		#get data from DB
 		data=funktions.sucheID(patId)[0]
 
@@ -315,21 +331,24 @@ class Main(QStackedWidget, funktions,  BILDVERARBEITUNG):
 		idV.setText(str(data[0]))
 		FullName=str(data[1]+" "+data[2])
 		fullnameV.setText(FullName)
-		BirthV.setText(data[4])
+		BirthV.setText(data[3])
+		lastVisitV.setText(data[4])
 
 	#set list of medical images
 	def setImgData(self,patId,table):
 		imgData=funktions.AllMedicalImg(str(patId))
-		self.insertMultiRowInPatientsTable(imgData,table)
+		imgDataMod=list()
+		for i in imgData: imgDataMod.append(i[1:])
+		self.insertMultiRowInPatientsTable(imgDataMod,table)
 
 	#set list of pulse records
 	def setPulData(self,patId,table):
 		sigData=funktions.AllSignals(str(patId))
-		self.insertMultiRowInPatientsTable(sigData,table)
+		self.insertMultiRowInPatientsTable(sigData[1:],table)
 
 	def errorIfNoSelect(self):
 		self.msgCreator()
-		self.msg.label.setText('You have to select patient to view details')
+		self.msg.label.setText('You have to select patient')
 
 
 
@@ -340,14 +359,21 @@ class Main(QStackedWidget, funktions,  BILDVERARBEITUNG):
 			self.errorIfNoSelect()
 		else:
 			self.patId=self.get_selected_id(self.tableWidget1,x)
-			self.setPatData(self.patId,self.Id_value5,self.Full_Name_value6,self.BirthDateValue6)
+			self.setPatData(self.patId,self.Id_value5,self.Full_Name_value6,self.BirthDateValue6,self.Last_Visit_value6)
 			self.setCurrentIndex(6)
 
-	
+	def reset_and_load_6(self):
+		self.loadPatientsDB()
+		self.graphicsView6.clear()
+		self.ImageNameValue6.setText("")
+		self.ImagePathValue6.setText("")
 	def setImage6(self):
 		fileName=self.setImage(self.graphicsView6)
-		self.ImageNameValue6.setText(fileName.split('/')[-1])
-		self.ImagePathValue6.setText('/'.join(fileName.split('/')[:-1]))
+		try:
+			self.ImageNameValue6.setText(fileName.split('/')[-1])
+			self.ImagePathValue6.setText('/'.join(fileName.split('/')))
+		except:
+			print("!!! Error : Not assign image")
 
 	def setImage(self,graphview):
 		fileName,_ = QFileDialog.getOpenFileName(None,"Select Image","","Image Files (*.png *.jpg *.jpeg *.bmp)")
@@ -360,8 +386,7 @@ class Main(QStackedWidget, funktions,  BILDVERARBEITUNG):
 
 	def AddImgDB(self):
 		nowDate=datetime.date.today().isoformat()
-		print(nowDate)
-		Data=[str(self.patId), self.ImgTypeCombo6.currentText(), nowDate, self.ImagePathValue6.text()]
+		Data=[str(self.patId), str(funktions.MaxImgId(self.patId)+1), self.ImgTypeCombo6.currentText(), nowDate, self.ImagePathValue6.text()]
 		print(Data)
 		funktions.neuImg(Data)
 
@@ -383,13 +408,61 @@ class Main(QStackedWidget, funktions,  BILDVERARBEITUNG):
 
 	#============================================================================ 10
 	def loadPulseRecordingM(self):
+		self.duration10.setText("")
+		self.time_value10.setText("")
 		x=self.tableWidget9.currentRow()
 		if (x<0):
 			self.errorIfNoSelect()
 		else:
 			self.patId=self.get_selected_id(self.tableWidget9,x)
-			self.setPatData(self.patId,self.Id10,self.Full_Name_value10,self.Birth_value10)
+			self.setPatData(self.patId,self.Id10,self.Full_Name_value10,self.Birth_value10,self.Last_Visit_value10)
+			self.refreshProcess()
 			self.setCurrentIndex(11)
+
+	def startRec10 (self):
+		self.timer=self.duration10.text()
+		print("processing")
+		self.data=pulse.startRec(self.timer, self.time_value10)
+		self.Save10.setEnabled(True)
+
+
+
+	def refreshProcess(self):
+		self.MedPort10.clear()
+		self.MedPort10.addItems(pulse.getAvaPorts())
+
+	def connectProcess(self):
+		a=pulse.connect(self.MedPort10.currentText(),self.MB_connection10)
+		if a:
+			self.Start10.setEnabled(True)
+
+		
+	def saveProcess(self):
+		self.time_value10.setText('')
+		pathpat="pulseRec/"+str(self.patId)
+		os.makedirs(pathpat, exist_ok=True)
+		path=pathpat+'/'+str(funktions.MaxRecId(self.patId)+1)
+		pulse.save(self.data, path)
+		self.Save10.setEnabled(False)
+		nowDate=datetime.date.today().isoformat()
+
+		self.getAvgBMP(self.data)
+
+		data=[str(self.patId), funktions.MaxRecId(self.patId)+1, '0', nowDate, self.timer ,path]
+		print(data)
+		funktions.neuRec(data)
+
+	def getAvgBMP(self,Data):
+		tmp=list()
+		for i in Data:
+			try:
+				tmp.append(int(i.split(',')[-1]))
+			except:
+				print("!!! Error in (",i,")")
+		avg=sum(tmp)/len(tmp)
+		print("avg=",avg)
+		return(avg)
+			
 
 
 
@@ -413,39 +486,83 @@ class Main(QStackedWidget, funktions,  BILDVERARBEITUNG):
 		id7=self.get_selected_id(self.PatientTable7,x)	
 		self.setImgData(id7,self.MedicalImageTable7)
 
+	def getImgPath7(self):
+		x=self.MedicalImageTable7.currentRow()
+		path=self.MedicalImageTable7.item(x,3).text()
+		self.fileName=path
+		self.setVarImg(path, self.graphicsViewO8)
+
+
 	#============================================================================ 8
 	def loadMedImgProcessingM(self):
 		self.setCurrentIndex(9)
 	
+	def reset_and_load_8(self):
+		self.loadMedImgProcessingCF()
+		self.graphicsViewO8.clear()
+		self.graphicsViewR8.clear()
+
 
 	# to enable parameter and name it if required
 	def ComboBox8event(self):
+		self.lineEdit8.setText("")
 		x=self.ProcessingTpyeCombo8.currentIndex()
-		if   (x==0): pass
-		elif (x==1): pass
-		elif (x==2): pass
-		elif (x==3): pass
-		elif (x==4): pass
-		elif (x==5): pass
-		elif (x==6): pass
-		elif (x==7): pass
+
+		if   (x==6):
+			self.ProcessingType8_2.show()
+			self.ProcessingType8_2.setText("schranke")
+			self.lineEdit8.show()
+
+		elif (x==7):
+			self.ProcessingType8_2.show()
+			self.ProcessingType8_2.setText("Gamma")
+			self.lineEdit8.show()
+
+		else:
+			self.ProcessingType8_2.hide()
+			self.lineEdit8.hide()
+
+
+
+
 
 			
-	# to exec right process func 
-	def process8(self):
+	# to exec right pro		self.data=list()
+
+	def process8(self):		
 		x=self.ProcessingTpyeCombo8.currentIndex()
 		if   (x==0): 
 			i=BILDVERARBEITUNG.bildhistugram(self.fileName)
 			self.setVarImg(i,self.graphicsViewR8)
 		elif (x==1): 
+			i=BILDVERARBEITUNG.bildfaltung(self.fileName,1)
+			self.setVarImg(i,self.graphicsViewR8)
+		elif (x==2): 
 			i=BILDVERARBEITUNG.bildfaltung(self.fileName,2)
 			self.setVarImg(i,self.graphicsViewR8)
-		elif (x==2): pass
-		elif (x==3): pass
-		elif (x==4): pass
-		elif (x==5): pass
-		elif (x==6): pass
-		elif (x==7): pass
+		elif (x==3):
+			i=BILDVERARBEITUNG.bildfaltung(self.fileName,3)
+			self.setVarImg(i,self.graphicsViewR8)
+		elif (x==4):
+			i=BILDVERARBEITUNG.bildfaltung(self.fileName,4)
+			self.setVarImg(i,self.graphicsViewR8)
+		elif (x==5):
+			i=BILDVERARBEITUNG.punktoperationen(self.fileName,1,0)
+			self.setVarImg(i,self.graphicsViewR8)
+
+		elif (x==6):
+			try:
+				i=BILDVERARBEITUNG.punktoperationen(self.fileName,2,int(self.lineEdit8.text()))
+				self.setVarImg(i,self.graphicsViewR8)
+			except:
+				print("!!! Error please set parameter")			
+		elif (x==7): 			
+			try:
+				i=BILDVERARBEITUNG.punktoperationen(self.fileName,3,int(self.lineEdit8.text()))
+				self.setVarImg(i,self.graphicsViewR8)
+			except:
+				print("!!! Error please set parameter")			
+
 
 	def setVarImg(self,img ,graphview):
 		pixmap0 = QPixmap(img)
@@ -457,6 +574,8 @@ class Main(QStackedWidget, funktions,  BILDVERARBEITUNG):
 	def loadMedImgProcessingCF(self):
 		self.setCurrentIndex(8)
 
+	def setVarImg12(self):
+		setVarImg(self,img ,graphview)
 
 	#choose image from hard disk
 	def setImage12(self):
@@ -466,6 +585,9 @@ class Main(QStackedWidget, funktions,  BILDVERARBEITUNG):
 
 
 	#==========================================================================
+
+
+
 	#==========================================================================
 	
 	def msgCreator(self):
